@@ -7,21 +7,16 @@ exports.signupUsers = (req,res,next)=>{
 
     const errors = validationResult(req)
     if(!errors.isEmpty()){
-        const error = new Error('Validation error')
+        console.log(errors);
+        const error = new Error('Validation error==================')
         error.statusCode = 422
         error.data = errors.array()
         throw error
     }
+
     const name = req.body.name
     const secondname = req.body.secondname
     const middlename = req.body.middlename
-    // const  photos =req.body.photos
-    // const position = req.body.position
-    // const regionId = req.body.regionId
-    // const districtsId = req.body.districtsId
-    // const mfyId =req.body.mfyId 
-    // const status = req.body.status
-    // const role =req.body.role
     const email = req.body.email  
     const password= req.body.password
   
