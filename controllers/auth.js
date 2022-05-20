@@ -15,13 +15,13 @@ exports.signupUsers = (req,res,next)=>{
     const name = req.body.name
     const secondname = req.body.secondname
     const middlename = req.body.middlename
-    const  photos =req.body.photos
-    const position = req.body.position
-    const regionId = req.body.regionId
-    const districtsId = req.body.districtsId
-    const mfyId =req.body.mfyId 
-    const status = req.body.status
-    const role =req.body.role
+    // const  photos =req.body.photos
+    // const position = req.body.position
+    // const regionId = req.body.regionId
+    // const districtsId = req.body.districtsId
+    // const mfyId =req.body.mfyId 
+    // const status = req.body.status
+    // const role =req.body.role
     const email = req.body.email  
     const password= req.body.password
   
@@ -34,14 +34,8 @@ exports.signupUsers = (req,res,next)=>{
             password:hashpass,
             name:name,
             secondname:secondname,
-            middlename:middlename,
-            photos:photos,
-            position:position,
-            regionId:regionId,
-            districtsId:districtsId,
-            mfyId:mfyId,
-            accountstatus:status,
-            accountrole:role
+            middlename:middlename
+           
         })
         return user.save()
     })
