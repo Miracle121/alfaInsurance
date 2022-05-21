@@ -26,7 +26,9 @@ const typeofobject = require('./routes/typeofobject')
 const object = require('./routes/objects')
 // const genders =require('./routes/genders')
 const app = express();
-const URL =  'mongodb://localhost:27017/Alfa'  
+// const URL =  'mongodb://localhost:27017/Alfa' 
+const URL ='mongodb://alfa:admin123a@87.237.235.44:27017/Alfa?authSource=admin'
+//const URL = 'mongodb://mvddb:mvddb123@87.237.235.44:27017/MVD'
 //const URL =    'mongodb://mvddb:mvddb123@87.237.235.44:27017/MVD'    //'mongodb://87.237.235.44:27017/MVD'
 app.use(cors())
 app.use(express.json())
