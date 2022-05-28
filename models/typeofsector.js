@@ -6,7 +6,6 @@ const typeofsectorSchema = new Schema({
         type:String,
         required:true
     },
-   
     creatorId:{
         type: Schema.Types.ObjectId,
         ref: 'Users',

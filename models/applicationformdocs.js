@@ -1,14 +1,15 @@
 const {Schema,model} = require('mongoose')
 
-const typeofrisksSchema = new Schema({
+
+const applicationformdocsSchema = new Schema({
     name:{
         type:String,
         required:true
     },
-    classesId:{
-        type: Schema.Types.ObjectId,
-        ref: 'Classesofproduct',
-    },
+    url:{
+        type:String,
+        required:true
+    },   
     creatorId:{
         type: Schema.Types.ObjectId,
         ref: 'Users',
@@ -17,4 +18,4 @@ const typeofrisksSchema = new Schema({
 },
 { timestamps:true })
 
-module.exports = model('Typeofrisks',typeofrisksSchema)
+module.exports = model('Applicationformdocs',applicationformdocsSchema)

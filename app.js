@@ -24,6 +24,13 @@ const typeofpayment = require('./routes/typeofpayment')
 const typeofpolice = require('./routes/typeofpolice')
 const typeofobject = require('./routes/typeofobject')
 const object = require('./routes/objects')
+const applicationformdocs = require('./routes/applicationformdocs')
+const contractform = require('./routes/contract')
+const additionaldocuments = require('./routes/additionaldocuments')
+const typeofclaimsettlement = require('./routes/typeofclaimsettlement')
+const typeofrefund = require('./routes/typeofrefund')
+const typeoffranchise = require('./routes/typeoffranchise')
+const baseoffranchise = require('./routes/baseoffranchise')
 // const genders =require('./routes/genders')
 const app = express();
 // const URL =  'mongodb://localhost:27017/Alfa' 
@@ -53,6 +60,16 @@ app.use('/typeofpolice',typeofpolice)
 app.use('/typeofpayment',typeofpayment)
 app.use('/typeofobject',typeofobject)
 app.use('/object',object)
+//====================25.05.2022================
+app.use('/applicationformdocs',applicationformdocs)
+app.use('/contractform',contractform)
+app.use('/additionaldocuments',additionaldocuments)
+//=======================26.05.2022========
+app.use('/typeofclaimsettlement',typeofclaimsettlement)
+app.use('/typeofrefund',typeofrefund)
+app.use('/typeoffranchise',typeoffranchise)
+app.use('./baseoffranchise',baseoffranchise)
+
 
 
 
