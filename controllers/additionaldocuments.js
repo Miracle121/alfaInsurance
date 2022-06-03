@@ -1,7 +1,10 @@
 const Additionaldocuments = require('../models/additionaldocuments')
 const User = require('../models/users')
 const {validationResult} = require('express-validator')
+const uploadFile = require("../middleware/upload");
+const fs = require('fs')
 
+//==========================================================
 exports.getadditionaldocuments= async(req,res,next)=>{
     const page = req.query.page ||1
     const counts = 20 //req.query.count ||20
@@ -22,7 +25,6 @@ exports.getadditionaldocuments= async(req,res,next)=>{
         next(err)
     } 
 }
-
 exports.getAdditionaldocumentsById = async(req,res,next)=>{
     const AgesId= req.params.id
     try {
@@ -44,23 +46,35 @@ exports.getAdditionaldocumentsById = async(req,res,next)=>{
         next(err)
     }
 }
-
-exports.createAdditionaldocuments = async(req,res,next)=>{
-    const name = req.body.name
-    const url= req.body.url
-    const result = new Additionaldocuments({
-        name:name,
-        url:url,
-        creatorId: req.userId
-    })
-    const results = await result.save()
-    res.status(200).json({
-        message:`ma'lumotlar kiritildi`,
-        results: results,
-        creatorId: req.userId,
-    })
+exports.createAdditionaldocuments = async(req,res,next)=>{    
+    const directoryPath = __basedir + "/uploads/";
+    try {
+      await uploadFile(req, res);
+      if (req.file == undefined) {
+        return res.status(400).send({ message: "Please upload a file!" });
+      }
+      const name = req.file.originalname  //req.body.name
+      const url= directoryPath+name //req.body.url     
+      console.log(url);
+      const result = new Additionaldocuments({
+          name:name,
+          url:url,
+          creatorId: req.userId
+      })
+      const results = await result.save()
+      res.status(200).json({
+          message:`ma'lumotlar kiritildi`,
+          results: results,
+          creatorId: req.userId,
+      })
+    //   res.status(200).send({
+    //     message: "Uploaded the file successfully: " + req.file.originalname,
+    //   });
+        
+    } catch (error) {
+        
+    }  
 }
-
 exports.updateAdditionaldocuments = async(req,res,next)=>{ 
     const AgesId = req.params.id
     const name = req.body.name
@@ -88,7 +102,6 @@ exports.updateAdditionaldocuments = async(req,res,next)=>{
         next(err)
     }
 }
-
 exports.deleteAdditionaldocuments = async(req,res,next)=>{
     const AgesId= req.params.id
     try {
@@ -115,3 +128,51 @@ exports.deleteAdditionaldocuments = async(req,res,next)=>{
         next(err)
     }
 }
+//=======================================================================
+ exports.upload = async (req, res) => {
+   
+    try {
+      await uploadFile(req, res);
+      if (req.file == undefined) {
+        return res.status(400).send({ message: "Please upload a file!" });
+      }
+      res.status(200).send({
+        message: "Uploaded the file successfully: " + req.file.originalname,
+      });
+    } catch (err) {
+      res.status(500).send({
+        message: `Could not upload the file: ${req.file.originalname}. ${err}`,
+      });
+    }
+  };
+  exports.getListFiles = (req, res) => {
+    const directoryPath = __basedir + "/uploads/";
+    console.log(directoryPath);
+    fs.readdir(directoryPath, function (err, files) {
+      if (err) {
+        res.status(500).send({
+          message: "Unable to scan files!",
+        });
+      }
+      let fileInfos = [];
+      files.forEach((file) => {
+        fileInfos.push({
+          name: file,
+          url: directoryPath + file,
+        });
+      });
+      res.status(200).send(fileInfos);
+    });
+  };
+  exports.download = (req, res) => {
+      
+    const fileName = req.params.name;
+    const directoryPath = __basedir + "/uploads/";
+    res.download(directoryPath + fileName, fileName, (err) => {
+      if (err) {
+        res.status(500).send({
+          message: "Could not download the file. " + err,
+        });
+      }
+    });
+  };

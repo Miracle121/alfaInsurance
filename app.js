@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path')
+
 const cors = require('cors')
 // const session = require('express-session');
 const region = require('./routes/regions');
@@ -31,15 +32,27 @@ const typeofclaimsettlement = require('./routes/typeofclaimsettlement')
 const typeofrefund = require('./routes/typeofrefund')
 const typeoffranchise = require('./routes/typeoffranchise')
 const baseoffranchise = require('./routes/baseoffranchise')
+const typeofpersons=  require('./routes/typeofpersons')
+const agents = require('./routes/agents')
+const products=require('./routes/products')
 // const genders =require('./routes/genders')
 const app = express();
 // const URL =  'mongodb://localhost:27017/Alfa' 
 const URL ='mongodb://alfa:admin123a@87.237.235.44:27017/Alfa?authSource=admin'
 //const URL = 'mongodb://mvddb:mvddb123@87.237.235.44:27017/MVD'
 //const URL =    'mongodb://mvddb:mvddb123@87.237.235.44:27017/MVD'    //'mongodb://87.237.235.44:27017/MVD'
+
+global.__basedir = __dirname;
+// var corsOptions = {
+//   origin: "http://localhost:8081"
+// };
 app.use(cors())
+
+
+
 app.use(express.json())
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('images',express.static(path.join(__dirname,'images')))
 app.use('/auth',auth)
 app.use('/regions',region)
@@ -69,6 +82,10 @@ app.use('/typeofclaimsettlement',typeofclaimsettlement)
 app.use('/typeofrefund',typeofrefund)
 app.use('/typeoffranchise',typeoffranchise)
 app.use('./baseoffranchise',baseoffranchise)
+//========================28.05.2022=========
+app.use('/typeofpersons',typeofpersons)
+app.use('/agents',agents)
+app.use('/products',products)
 
 
 

@@ -25,13 +25,6 @@ const productsSchema = new Schema({
         required: true
     },
 
-    // formofinsurerId:{ 
-    //     // endi qilinadi
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'formofinsurer',
-    //     required: true
-    // },
-
     typeofsectorId:{
         type: Schema.Types.ObjectId,
         ref: 'Typeofsector',
@@ -98,9 +91,9 @@ const productsSchema = new Schema({
         type:Boolean,
         required:true
     }, 
-    fixedpolicyholder: [ { // endi qilinadi
+    fixedpolicyholder: [ { 
             type: Schema.Types.ObjectId,
-            ref: 'fixedpolicyholde', 
+            ref: 'Agents',   //'fixedpolicyholde', 
             required: true
         }],
     Isbeneficiary:{
@@ -112,9 +105,9 @@ const productsSchema = new Schema({
         type: Boolean,            
         required: true
     },
-    fixedbeneficiary: [{ // endi qilinadi
+    fixedbeneficiary: [{ 
             type: Schema.Types.ObjectId,
-            ref: 'beneficiary', // endi qilinadi
+            ref: 'Agents', 
             required: true
         }],  
     Isfixedpremium:{
@@ -215,9 +208,9 @@ const productsSchema = new Schema({
     },
   //==== page 4==========
 //==========tarif==========
-    agentlist:[{ // endi qilinadi
+    agentlist:[{ 
         type: Schema.Types.ObjectId,
-        ref: 'agents',
+        ref: 'Agents',
         required: true
     }],
     Isagreement:{
@@ -261,21 +254,19 @@ const productsSchema = new Schema({
         type:Number,
         required: true
     },
-    typeoffranchise:{// endi qilinadi
+    typeoffranchise:{
         type: Schema.Types.ObjectId,
         ref: 'typeoffranchise',
         required: true
     },
     baseoffranchise:{
-        // endi qilinadi
+        
         type: Schema.Types.ObjectId,
         ref: 'baseoffranchise',
         required: true
     },
     franchise:{
-         // endi qilinadi
-         type: Schema.Types.ObjectId,
-         ref: 'franchise',
+         type: String,
          required: true
     }
 

@@ -1,0 +1,51 @@
+---nodejs install---
+cd ~
+curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt install nodejs
+
+---mongodb install---
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo systemctl start mongod
+sudo systemctl enable mongod
+sudo systemctl status mongod
+
+---redis install---
+sudo apt update
+sudo apt install redis-server
+sudo systemctl start redis.service
+sudo systemctl enable redis
+
+---extractors install---
+sudo apt-get install xpdf
+sudo apt-get install unrtf
+sudo apt-get install antiword
+
+---pm install---
+sudo npm i -g pm2
+
+---repo download---
+cd /
+sudo git clone https://dlppm@bitbucket.org/dgz-srv-v2/backend-build.git
+password: eYXbJaJf36mgApqaj2by
+cd backend-build
+sudo npm install
+
+--- start srv---
+
+sudo chmod +x server
+sudo chmod +x agent
+sudo chmod +x rdw
+sudo chmod +x smtp
+sudo chmod +x ftp
+
+sudo pm2 start ./server 
+sudo pm2 start ./agent 
+sudo pm2 start ./rdw
+sudo pm2 start ./smtp
+sudo pm2 start ./ftp
+sudo pm2 startup
+sudo pm2 save

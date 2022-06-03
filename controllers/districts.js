@@ -10,7 +10,7 @@ exports.getDistricts= async(req,res,next)=>{
     let totalItems
     try {
     totalItems = await Districts.find().countDocuments()
-     const districts = await Districts.find().populate('regiId','name').populate('mfy','name').skip((page-1)*counts).limit(counts)
+     const districts = await Districts.find().populate('regiId','name').skip((page-1)*counts).limit(counts)
      res.status(200).json({
          message:`Tumanlar yuborildi`,
          districts:districts,
@@ -28,7 +28,7 @@ exports.getDistricts= async(req,res,next)=>{
 exports.getDistrictsById = async(req,res,next)=>{
     const regId= req.params.id
     try {
-        const dist= await Districts.findById(regId).populate('regiId','name').populate('mfy','name')
+        const dist= await Districts.findById(regId).populate('regiId','name')
         if(!dist){
             const error = new Error('Object  not found')
             error.statusCode = 404

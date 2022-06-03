@@ -1,17 +1,12 @@
 const {Schema,model} = require('mongoose')
 
-const districtsSchema = new Schema({
+
+const typeofpersonesSchema = new Schema({
     name:{
         type:String,
         required:true
     },
    
-    regiId:{
-        type: Schema.Types.ObjectId,
-        ref: 'Region',
-        required: true
-    },
-  
     creatorId:{
         type: Schema.Types.ObjectId,
         ref: 'Users',
@@ -20,4 +15,4 @@ const districtsSchema = new Schema({
 },
 { timestamps:true })
 
-module.exports = model('Districts',districtsSchema)
+module.exports = model('Typeofpersones',typeofpersonesSchema)

@@ -8,7 +8,7 @@ const router = express.Router()
 router.get('/',IsAuth,Products.getProducts)
 router.get('/:id',IsAuth,Products.getProductsId)
 
-router.post('/',IsAuth,[body('name').trim().isLength({min:3})],Products.createProducts)
+router.post('/',IsAuth,[body('productname').trim().isLength({min:3})],Products.createProducts)
 router.put('/:id',IsAuth,Products.updateProducts)
 router.delete('/:id',IsAuth,Products.deleteProducts)
 

@@ -8,9 +8,13 @@ const router = express.Router()
 router.get('/',IsAuth,additionaldocuments.getadditionaldocuments)
 router.get('/:id',IsAuth,additionaldocuments.getAdditionaldocumentsById)
 
-router.post('/',IsAuth,[body('name').trim().isLength({min:3})],additionaldocuments.createAdditionaldocuments)
+router.post('/',IsAuth,additionaldocuments.createAdditionaldocuments)
 router.put('/:id',IsAuth,additionaldocuments.updateAdditionaldocuments)
 router.delete('/:id',IsAuth,additionaldocuments.deleteAdditionaldocuments)
+
+// router.post('/',IsAuth,additionaldocuments.upload)
+router.get('/files/:name',IsAuth,additionaldocuments.download)
+
 
 
 module.exports = router
