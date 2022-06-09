@@ -10,7 +10,7 @@ exports.getRole= async(req,res,next)=>{
         const roles = await Role.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Roles list`,
-         role:roles,
+         data:roles,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getRoleId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Roles list`,
-            roles:roles
+            data:roles
         })
     } catch (err) {
         if(!err.statusCode)
@@ -61,7 +61,7 @@ exports.createRole= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Role addes`,
-        roles: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -81,7 +81,7 @@ exports.updateRole =async(req,res,next)=>{
     const groupsofpr = await groups.save()
     res.status(200).json({
         message:`Role is changed`,
-        group: groupsofpr
+        data: groupsofpr
     })
     } catch (err) {
         if(!err.statusCode){

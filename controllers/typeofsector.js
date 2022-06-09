@@ -10,7 +10,7 @@ exports.getTypeofsector= async(req,res,next)=>{
         const typeofsector = await Typeofsector.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Type of sector`,
-         typeofsector:typeofsector,
+         data:typeofsector,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getTypeofsectorId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Type of sector`,
-            policyformats:policyformats
+            data:policyformats
         })
     } catch (err) {
         if(!err.statusCode)
@@ -61,7 +61,7 @@ exports.createTypeofsector= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Type of sector added`,
-        group: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -81,7 +81,7 @@ exports.updateTypeofsector =async(req,res,next)=>{
     const groupsofpr = await groups.save()
     res.status(200).json({
         message:`Type of sector changed`,
-        group: groupsofpr
+        data: groupsofpr
     })
     } catch (err) {
         if(!err.statusCode){

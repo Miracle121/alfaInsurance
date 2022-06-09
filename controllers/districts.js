@@ -13,7 +13,7 @@ exports.getDistricts= async(req,res,next)=>{
      const districts = await Districts.find().populate('regiId','name').skip((page-1)*counts).limit(counts)
      res.status(200).json({
          message:`Tumanlar yuborildi`,
-         districts:districts,
+         data:districts,
          totalItems:totalItems
      })
     } catch (err) {
@@ -36,7 +36,7 @@ exports.getDistrictsById = async(req,res,next)=>{
         }
         res.status(200).json({
             message:`ma'lumotlar topildi`,
-            districts:dist
+            data:dist
         })
     } catch (err) {
         if(!err.statusCode)
@@ -60,7 +60,7 @@ exports.getDistrictsByRegId = async(req,res,next)=>{
             }
             res.status(200).json({
                 message:`ma'lumotlar topildi`,
-                districts:dist
+                data:dist
             })
         } catch (err) {
             if(!err.statusCode)
@@ -98,7 +98,7 @@ exports.createDistricts = async(req,res,next)=>{
     const reg = await  region.save()
     res.status(200).json({
         message:`ma'lumotlar kiritildi`,
-        districts: districts,
+        data: districts,
         creatorId:req.userId,
         reg: reg
 

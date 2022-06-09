@@ -37,7 +37,7 @@ exports.getAgentsById = async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Agents List`,
-            result:result
+            data:result
         })
     } catch (err) {
         if(!err.statusCode)
@@ -56,9 +56,7 @@ exports.createAgents = async(req,res,next)=>{
     const regionId= req.body.regionId
     const districtsId = req.body.districtsId
     const isbeneficiary= req.body.isbeneficiary
-    const isfixedpolicyholde = req.body.isfixedpolicyholde
-
- 
+    const isfixedpolicyholde = req.body.isfixedpolicyholde 
     const result = new Agents({
         fullName:fullName,
         inn:inn,
@@ -73,7 +71,7 @@ exports.createAgents = async(req,res,next)=>{
     const results = await result.save()
     res.status(200).json({
         message:`Agents List`,
-        results: results,
+        data: results,
         creatorId: req.userId,
     })
 }
@@ -94,7 +92,7 @@ exports.updateAgents = async(req,res,next)=>{
     const data =await result.save()  
     res.status(200).json({
         message:`Agents List`,
-        resultorder: data
+        data: data
     })
     } catch (err) {
         if(!err.statusCode){

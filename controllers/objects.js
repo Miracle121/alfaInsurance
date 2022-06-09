@@ -10,7 +10,7 @@ exports.getObject= async(req,res,next)=>{
         const typeofobject = await Objects.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Objects list`,
-         object: typeofobject,
+         data: typeofobject,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getObjectId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Objects list`,
-            objects: objects
+            data: objects
         })
     } catch (err) {
         if(!err.statusCode)
@@ -61,7 +61,7 @@ exports.createObject= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Objects added`,
-        objects: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -82,7 +82,7 @@ exports.updateObject =async(req,res,next)=>{
     const typeofrisk = await groups.save()
     res.status(200).json({
         message:`Objects is changed`,
-        typeofobjecs: typeofrisk
+        data: typeofrisk
     })
     } catch (err) {
         if(!err.statusCode){

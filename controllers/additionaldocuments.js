@@ -36,7 +36,7 @@ exports.getAdditionaldocumentsById = async(req,res,next)=>{
         }
         res.status(200).json({
             message:`ma'lumotlar topildi`,
-            result:result
+            data:result
         })
     } catch (err) {
         if(!err.statusCode)
@@ -51,11 +51,12 @@ exports.createAdditionaldocuments = async(req,res,next)=>{
     try {
       await uploadFile(req, res);
       if (req.file == undefined) {
-        return res.status(400).send({ message: "Please upload a file!" });
+         res.status(400).send({ message: "Please upload a file!" });
       }
       const name = req.file.originalname  //req.body.name
+      const xx = req.body.name1
       const url= directoryPath+name //req.body.url     
-      console.log(url);
+      console.log(xx);
       const result = new Additionaldocuments({
           name:name,
           url:url,
@@ -64,7 +65,7 @@ exports.createAdditionaldocuments = async(req,res,next)=>{
       const results = await result.save()
       res.status(200).json({
           message:`ma'lumotlar kiritildi`,
-          results: results,
+          data: results,
           creatorId: req.userId,
       })
     //   res.status(200).send({
@@ -72,7 +73,9 @@ exports.createAdditionaldocuments = async(req,res,next)=>{
     //   });
         
     } catch (error) {
-        
+      console.log(error);
+      
+       res.status(400).json({message:error});
     }  
 }
 exports.updateAdditionaldocuments = async(req,res,next)=>{ 
@@ -91,7 +94,7 @@ exports.updateAdditionaldocuments = async(req,res,next)=>{
     const data =await result.save()  
     res.status(200).json({
         message:`ma'lumotlar o'zgartirildi`,
-        resultorder: data
+        data: data
     })
     } catch (err) {
         if(!err.statusCode){

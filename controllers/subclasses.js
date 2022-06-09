@@ -10,7 +10,7 @@ exports.getSubClassesofproduct= async(req,res,next)=>{
         const classesofproduct = await Subclasses.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Subclasse of products`,
-         classesofproduct:classesofproduct,
+         data:classesofproduct,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getSubClassesofproductId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`SubClasse of products`,
-            classesofproduct: classesofproduct
+            data: classesofproduct
         })
     } catch (err) {
         if(!err.statusCode)
@@ -62,7 +62,7 @@ exports.createSubClassesofproduct= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`SubClasse of products`,
-        group: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -83,7 +83,7 @@ exports.updateSubClassesofproduct =async(req,res,next)=>{
     const classesofproduct = await groups.save()
     res.status(200).json({
         message:`SubClasse of products`,
-        classesofproduct: classesofproduct
+        data: classesofproduct
     })
     } catch (err) {
         if(!err.statusCode){

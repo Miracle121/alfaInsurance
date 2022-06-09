@@ -60,7 +60,7 @@ exports.getUsers= async(req,res,next)=>{
      .skip((page-1)*counts).limit(counts)
      res.status(200).json({
          message:`Viloyatlar yuborildi`,
-         users:users,
+         data:users,
          totalItems:totalItems
      })
     } catch (err) {

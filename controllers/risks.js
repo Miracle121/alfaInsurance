@@ -10,7 +10,7 @@ exports.getRisks= async(req,res,next)=>{
         const risks = await Risks.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Risks list`,
-         risk:risks,
+         data:risks,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getRisksId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Risks list`,
-            typeofrisk:typeofrisk
+            data:typeofrisk
         })
     } catch (err) {
         if(!err.statusCode)
@@ -61,7 +61,7 @@ exports.createRisks= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Risk added`,
-        typeofrisk: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -82,7 +82,7 @@ exports.updateRisks =async(req,res,next)=>{
     const typeofrisk = await groups.save()
     res.status(200).json({
         message:`Risks is changed`,
-        typeofrisk: typeofrisk
+        data: typeofrisk
     })
     } catch (err) {
         if(!err.statusCode){

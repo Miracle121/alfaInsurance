@@ -10,7 +10,7 @@ exports.getTypeofpolice= async(req,res,next)=>{
         const typeofpolice = await Typeofpolice.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`List of police`,
-         typeofpolice: typeofpolice,
+         data: typeofpolice,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getTypeofpoliceId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`List of police`,
-            typeofpolice: typeofpolice
+            data: typeofpolice
         })
     } catch (err) {
         if(!err.statusCode)
@@ -59,7 +59,7 @@ exports.createTypeofpolice= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Police added`,
-        typeofpolice: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -78,7 +78,7 @@ exports.updateTypeofpolice =async(req,res,next)=>{
     const typeofrisk = await groups.save()
     res.status(200).json({
         message:`Police added`,
-        typeofrisk: typeofrisk
+        data: typeofrisk
     })
     } catch (err) {
         if(!err.statusCode){

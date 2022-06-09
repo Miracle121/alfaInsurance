@@ -63,8 +63,8 @@ const productsSchema = new Schema({
     },
     applicationformId:[{ 
             type: Schema.Types.ObjectId,
-            ref: 'Applicationformdocs', 
-            required: true
+            ref: 'Applicationformdocs'
+         
         }],
     iscontractform:{
         type:Boolean,
@@ -73,8 +73,8 @@ const productsSchema = new Schema({
     contractform:[
         [{
             type: Schema.Types.ObjectId,
-            ref: 'Contractformdocs', 
-            required: true
+            ref: 'Contractformdocs'
+           
         }]
     ],
     Isadditionaldocuments:{
@@ -83,8 +83,8 @@ const productsSchema = new Schema({
     },
     additionaldocuments:[{ 
             type: Schema.Types.ObjectId,
-            ref: 'additionaldocuments', 
-            required: true
+            ref: 'additionaldocuments'
+           
         }],
     //=====page 3==== 
     Isfixedpolicyholder:{

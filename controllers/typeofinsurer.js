@@ -10,7 +10,7 @@ exports.getTypeOfInsurer= async(req,res,next)=>{
      const subgroups = await Typeofinsurer.find().skip((page-1)*counts).limit(counts)
      res.status(200).json({
          message:`SubGroups of products`,
-         subgroups:subgroups,
+         data:subgroups,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getTypeOfInsurerById =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`ma'lumotlar topildi`,
-            groups:groups
+            data:groups
         })
     } catch (err) {
         if(!err.statusCode)
@@ -62,7 +62,7 @@ exports.createTypeOfInsurer= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`ma'lumotlar kiritildi`,
-        group: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -83,7 +83,7 @@ exports.updateTypeOfInsurer =async(req,res,next)=>{
     const groupsofpr = await groups.save()
     res.status(200).json({
         message:`Sub-Groups data changed`,
-        group: groupsofpr
+        data: groupsofpr
     })
     } catch (err) {
         if(!err.statusCode){

@@ -10,7 +10,7 @@ exports.getTypeofpersons= async(req,res,next)=>{
         const classesofproduct = await Typeofpersons.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Typeofpersons of products`,
-         Typeofpersons:classesofproduct,
+         data:classesofproduct,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getTypeofpersonsById =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Typeofpersons of products`,
-            classesofproduct:classesofproduct
+            data:classesofproduct
         })
     } catch (err) {
         if(!err.statusCode)
@@ -61,7 +61,7 @@ exports.createTypeofpersons= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Typeofpersons of products`,
-        group: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -81,7 +81,7 @@ exports.updateTypeofpersons =async(req,res,next)=>{
     const classesofproduct = await groups.save()
     res.status(200).json({
         message:`Classe of products`,
-        classesofproduct: classesofproduct
+        data: classesofproduct
     })
     } catch (err) {
         if(!err.statusCode){

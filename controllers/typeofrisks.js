@@ -10,7 +10,7 @@ exports.getTypeofrisks= async(req,res,next)=>{
         const typeofrisks = await Typeofrisks.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Type of risks list`,
-         risk:typeofrisks,
+         data:typeofrisks,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getTypeofrisksId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Type of risks list`,
-            typeofrisk:typeofrisk
+            data:typeofrisk
         })
     } catch (err) {
         if(!err.statusCode)
@@ -59,7 +59,7 @@ exports.createTypeofrisks= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Type of risks list`,
-        typeofrisk: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -78,7 +78,7 @@ exports.updateTypeofrisks =async(req,res,next)=>{
     const typeofrisk = await groups.save()
     res.status(200).json({
         message:`Type of risks list`,
-        typeofrisk: typeofrisk
+        data: typeofrisk
     })
     } catch (err) {
         if(!err.statusCode){

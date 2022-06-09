@@ -15,7 +15,7 @@ exports.getMfy= async(req,res,next)=>{
      .skip((page-1)*counts).limit(counts)
      res.status(200).json({
          message:`Viloyatlar yuborildi`,
-         mfy:mfy,
+         data:mfy,
          totalItems:totalItems
      })
     } catch (err) {
@@ -40,7 +40,7 @@ exports.getByRegId = async (req,res,next)=>{
         }
         res.status(200).json({
             message:`ma'lumotlar topildi`,
-            mfy:mfy
+            data:mfy
         })
     } catch (err) {
         if(!err.statusCode)
@@ -63,7 +63,7 @@ exports.getByDistId = async (req,res,next)=>{
         }
         res.status(200).json({
             message:`ma'lumotlar topildi`,
-            mfy:mfy
+            data:mfy
         })
     } catch (err) {
         if(!err.statusCode)
@@ -87,7 +87,7 @@ exports.getMfyById = async(req,res,next)=>{
         }
         res.status(200).json({
             message:`ma'lumotlar topildi`,
-            mfy:mfy
+            data:mfy
         })
     } catch (err) {
         if(!err.statusCode)
@@ -114,7 +114,7 @@ exports.createMfy = async(req,res,next)=>{
     const district = await dist.save()
     res.status(200).json({
         message:`ma'lumotlar kiritildi`,
-        mfy: mfy,
+        data: mfy,
         district:district,
         creatorId: req.userId,
     })
@@ -137,7 +137,7 @@ exports.updateMfy = async(req,res,next)=>{
     const data =await mfy.save()  
     res.status(200).json({
         message:`ma'lumotlar o'zgartirildi`,
-        mfy: data
+        data: data
     })
     } catch (err) {
         if(!err.statusCode){

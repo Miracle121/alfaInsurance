@@ -12,7 +12,7 @@ exports.getRegions= async(req,res,next)=>{
      const region = await Region.find().populate('districts','name').skip((page-1)*counts).limit(counts)
      res.status(200).json({
          message:`Viloyatlar yuborildi`,
-         region:region,
+         data:region,
          totalItems:totalItems
      })
     } catch (err) {
@@ -33,7 +33,7 @@ exports.getRegionsById =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`ma'lumotlar topildi`,
-            region:region
+            data:region
         })
     } catch (err) {
         if(!err.statusCode)
@@ -66,9 +66,9 @@ exports.createRegions= async (req,res,next)=>{
         throw error
         }
     const name = req.body.name
-    const viewBox = req.body.viewBox
-    const pathd = req.body.pathd
-    const transform = req.body.transform
+    // const viewBox = req.body.viewBox
+    // const pathd = req.body.pathd
+    // const transform = req.body.transform
     const reg =new Region({
         name: name,
         viewBox:viewBox,
@@ -79,7 +79,7 @@ exports.createRegions= async (req,res,next)=>{
     const region = await reg.save()
     res.status(201).json({
         message:`ma'lumotlar kiritildi`,
-        regions: region,
+        data: region,
         creatorId:req.userId
     })
 
@@ -112,9 +112,9 @@ exports.createRegions= async (req,res,next)=>{
 exports.updateRegions =async(req,res,next)=>{
     const regId = req.params.id
     const name = req.body.name
-    const viewBox = req.body.viewBox
-    const pathd = req.body.pathd
-    const transform = req.body.transform
+    // const viewBox = req.body.viewBox
+    // const pathd = req.body.pathd
+    // const transform = req.body.transform
 
     try {
     const region = await Region.findById(regId)
@@ -124,9 +124,9 @@ exports.updateRegions =async(req,res,next)=>{
         throw error
     }
     region.name= name
-    region.viewBox =viewBox
-    region.pathd =pathd
-    region.transform = transform
+    // region.viewBox =viewBox
+    // region.pathd =pathd
+    // region.transform = transform
     const data = region.save()
     res.status(200).json({
         message:`ma'lumotlar o'zgartirildi`,

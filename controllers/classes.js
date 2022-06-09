@@ -10,7 +10,7 @@ exports.getClassesofproduct= async(req,res,next)=>{
         const classesofproduct = await Classesofproduct.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Classe of products`,
-         classesofproduct:classesofproduct,
+         data:classesofproduct,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getClassesofproductId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Classe of products`,
-            classesofproduct:classesofproduct
+            data:classesofproduct
         })
     } catch (err) {
         if(!err.statusCode)
@@ -61,7 +61,7 @@ exports.createClassesofproduct= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Classe of products`,
-        group: groups,
+        data: groups,
         creatorId:req.userId
     })
 }

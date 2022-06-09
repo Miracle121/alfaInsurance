@@ -34,7 +34,7 @@ exports.getGendersById = async(req,res,next)=>{
         }
         res.status(200).json({
             message:`ma'lumotlar topildi`,
-            result:result
+            data:result
         })
     } catch (err) {
         if(!err.statusCode)
@@ -54,7 +54,7 @@ exports.createGenders = async(req,res,next)=>{
     const results = await result.save()
     res.status(200).json({
         message:`ma'lumotlar kiritildi`,
-        results: results,
+        data: results,
         creatorId: req.userId,
     })
 }
@@ -73,7 +73,7 @@ exports.updateGenders = async(req,res,next)=>{
     const data =await result.save()  
     res.status(200).json({
         message:`ma'lumotlar o'zgartirildi`,
-        resultorder: data
+        data: data
     })
     } catch (err) {
         if(!err.statusCode){

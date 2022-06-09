@@ -10,7 +10,7 @@ exports.getPolicyformats= async(req,res,next)=>{
      const policyformats = await Policyformats.find().skip((page-1)*counts).limit(counts)
      res.status(200).json({
          message:`Policy formats of products`,
-         policyformats:policyformats,
+         data:policyformats,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getPolicyformatsId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Policy formats of products`,
-            policyformats:policyformats
+            data:policyformats
         })
     } catch (err) {
         if(!err.statusCode)
@@ -61,7 +61,7 @@ exports.createPolicyformats= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Policy formats add`,
-        group: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -81,7 +81,7 @@ exports.updatePolicyformats =async(req,res,next)=>{
     const groupsofpr = await groups.save()
     res.status(200).json({
         message:`Policy formats of products changed`,
-        group: groupsofpr
+        data: groupsofpr
     })
     } catch (err) {
         if(!err.statusCode){

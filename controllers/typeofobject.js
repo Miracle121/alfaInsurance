@@ -10,7 +10,7 @@ exports.getTypeofobject= async(req,res,next)=>{
         const typeofobject = await Typeofobject.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Type of objects`,
-         typeofobject: typeofobject,
+         data: typeofobject,
          totalItems:totalItems
      })
     } 
@@ -33,7 +33,7 @@ exports.getTypeofobjectId =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`Type of objects`,
-            typeofobject: typeofobject
+            data: typeofobject
         })
     } catch (err) {
         if(!err.statusCode)
@@ -59,7 +59,7 @@ exports.createTypeofobject= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`Police added`,
-        typeofobject: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -78,7 +78,7 @@ exports.updateTypeofobject =async(req,res,next)=>{
     const typeofrisk = await groups.save()
     res.status(200).json({
         message:`Police added`,
-        typeofobjecs: typeofrisk
+        data: typeofrisk
     })
     } catch (err) {
         if(!err.statusCode){

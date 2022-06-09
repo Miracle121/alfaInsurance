@@ -10,7 +10,7 @@ exports.getStatusOfProduct= async(req,res,next)=>{
      const statusofproduct = await Statusofproducts.find().skip((page-1)*counts).limit(counts)
      res.status(200).json({
          message:`Status of products`,
-         status:statusofproduct,
+         data:statusofproduct,
          totalItems:totalItems
      })
     } 
@@ -60,7 +60,7 @@ exports.createStatusOfProduct= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`ma'lumotlar kiritildi`,
-        statusofproduct: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -79,7 +79,7 @@ exports.updateStatusOfProduct =async(req,res,next)=>{
     const groupsofpr = await groups.save()
     res.status(200).json({
         message:`Status of product  changed`,
-        statusofproduct: groupsofpr
+        data: groupsofpr
     })
     } catch (err) {
         if(!err.statusCode){

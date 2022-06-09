@@ -10,7 +10,7 @@ exports.getGroupsofProducts= async(req,res,next)=>{
      const groups = await Groupsofproducts.find().skip((page-1)*counts).limit(counts)
      res.status(200).json({
          message:`Groups of products`,
-         groups:groups,
+         data:groups,
          totalItems:totalItems
      })
     } catch (err)
@@ -32,7 +32,7 @@ exports.getGroupsofProductsById =async(req,res,next)=>{
         }
         res.status(200).json({
             message:`ma'lumotlar topildi`,
-            groups:groups
+            data:groups
         })
     } catch (err) {
         if(!err.statusCode)
@@ -59,7 +59,7 @@ exports.createGroupsofProducts= async (req,res,next)=>{
     const groups = await group.save()
     res.status(201).json({
         message:`ma'lumotlar kiritildi`,
-        group: groups,
+        data: groups,
         creatorId:req.userId
     })
 }
@@ -82,7 +82,7 @@ exports.updateGroupsofProducts =async(req,res,next)=>{
     const groupsofpr = await groups.save()
     res.status(200).json({
         message:`Groups data changed`,
-        group: groupsofpr
+        data: groupsofpr
     })
     } catch (err) {
         if(!err.statusCode){

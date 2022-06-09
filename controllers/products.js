@@ -1,6 +1,7 @@
 const Products = require('../models/products')
+const Applicationformdocs = require('../models/applicationformdocs')
 const {validationResult} = require('express-validator')
-
+const uploadFile = require("../middleware/upload");
 exports.getProducts= async(req,res,next)=>{
     const page = req.query.page ||1   
     const counts = 20 //req.query.count ||20
@@ -44,7 +45,8 @@ exports.getProductsId =async(req,res,next)=>{
     }
 }
 
-exports.createProducts= async (req,res,next)=>{      
+exports.createProducts= async (req,res,next)=>{     
+    const directoryPath = __basedir + "/uploads/"; 
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         const error = new Error('Validation error')
@@ -62,11 +64,51 @@ exports.createProducts= async (req,res,next)=>{
     const statusofproducts = req.body.statusofproducts
     const riskId = req.body.riskId
     const isapplicationform = req.body.isapplicationform
-    const applicationformId = req.body.applicationformId
+    if(isapplicationform){        
+            try {
+            await uploadFile(req, res);
+            if (req.file == undefined) {
+               res.status(400).send({ message: "Please upload a file!" });
+            }
+            const name = req.file.originalname  //req.body.name
+            const url= directoryPath+name //req.body.url     
+           
+            const result = new Applicationformdocs({
+            name:name,
+            url:url,
+            creatorId: req.userId
+        })        
+         
+           const results = await result.save()
+           const applicationformId = results.__id   
+           //req.body.applicationformId
+            // res.status(200).json({
+            //     message:`ma'lumotlar kiritildi`,
+            //     results: results,
+            //     creatorId: req.userId,
+            // })
+         
+              
+          } catch (error) {
+            console.log(error);            
+             res.status(400).json({message:error});
+          }  
+
+        
+    }
+
+   
     const iscontractform= req.body.iscontractform
-    const contractform= req.body.contractform
+    if(iscontractform){
+        const contractform= req.body.contractform
+    }
+    
     const Isadditionaldocuments= req.body.Isadditionaldocuments
-    const additionaldocuments= req.body.additionaldocuments
+    if(Isadditionaldocuments){
+        const additionaldocuments= req.body.additionaldocuments
+
+    }
+    
     //===========page 3===================
     const Isfixedpolicyholder = req.body.Isfixedpolicyholder
     const fixedpolicyholder = req.body.fixedpolicyholder
