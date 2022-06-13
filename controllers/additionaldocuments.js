@@ -54,9 +54,10 @@ exports.createAdditionaldocuments = async(req,res,next)=>{
          res.status(400).send({ message: "Please upload a file!" });
       }
       const name = req.file.originalname  //req.body.name
-      const xx = req.body.name1
-      const url= directoryPath+name //req.body.url     
-      console.log(xx);
+      const url= directoryPath+name //req.body.url  
+      
+      console.log(name);
+   
       const result = new Additionaldocuments({
           name:name,
           url:url,
@@ -80,8 +81,8 @@ exports.createAdditionaldocuments = async(req,res,next)=>{
 }
 exports.updateAdditionaldocuments = async(req,res,next)=>{ 
     const AgesId = req.params.id
-    const name = req.body.name
-    const url = req.body.url
+    const name = req.file.originalname  //req.body.name
+    const url= directoryPath+name //req.body.url 
     try {
     const result = await Additionaldocuments.findById(AgesId)
     if(!result){

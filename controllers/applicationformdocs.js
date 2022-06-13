@@ -1,6 +1,7 @@
 const Applicationformdocs = require('../models/applicationformdocs')
 const User = require('../models/users')
 const {validationResult} = require('express-validator')
+const uploadFile = require("../middleware/upload");
 
 exports.getApplicationformdocs= async(req,res,next)=>{
     const page = req.query.page ||1
@@ -46,25 +47,38 @@ exports.getApplicationformdocsById = async(req,res,next)=>{
 }
 
 exports.createApplicationformdocs = async(req,res,next)=>{
-    const name = req.body.name
-    const url= req.body.url
-    const result = new Applicationformdocs({
-        name:name,
-        url:url,
-        creatorId: req.userId
-    })
-    const results = await result.save()
-    res.status(200).json({
-        message:`ma'lumotlar kiritildi`,
-        data: results,
-        creatorId: req.userId,
-    })
+
+    const directoryPath = __basedir + "/uploads/";
+    try {
+      await uploadFile(req, res);  
+      if (req.file == undefined) {
+         res.status(400).send({ message: "Please upload a file!" });
+      }
+      const name = req.file.originalname  //req.body.name
+      const url= directoryPath+name //req.body.url  
+      console.log(name);   
+      const result = new Applicationformdocs({
+          name:name,
+          url:url,
+          creatorId: req.userId
+      })
+      const results = await result.save()
+      res.status(200).json({
+          message:`ma'lumotlar kiritildi`,
+          data: results,
+          creatorId: req.userId,
+      })
+        
+    } catch (error) {
+      console.log(error);      
+       res.status(400).json({message:error});
+    } 
 }
 
 exports.updateApplicationformdocs = async(req,res,next)=>{ 
     const AgesId = req.params.id
-    const name = req.body.name
-    const url = req.body.url
+     const name = req.file.originalname  //req.body.name
+    const url= directoryPath+name //req.body.url 
     try {
     const result = await Applicationformdocs.findById(AgesId)
     if(!result){
