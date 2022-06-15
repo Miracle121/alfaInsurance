@@ -72,7 +72,7 @@ exports.updateTypeofclaimsettlement = async(req,res,next)=>{
         throw error
     }
     result.name= name
-    result.url=url
+    // result.url=url
     const data =await result.save()  
     res.status(200).json({
         message:`ma'lumotlar o'zgartirildi`,

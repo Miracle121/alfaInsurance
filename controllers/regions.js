@@ -66,14 +66,8 @@ exports.createRegions= async (req,res,next)=>{
         throw error
         }
     const name = req.body.name
-    // const viewBox = req.body.viewBox
-    // const pathd = req.body.pathd
-    // const transform = req.body.transform
     const reg =new Region({
-        name: name,
-        viewBox:viewBox,
-        pathd:pathd,
-        transform:transform,
+        name: name,       
         creatorId: req.userId
     })
     const region = await reg.save()
@@ -83,38 +77,13 @@ exports.createRegions= async (req,res,next)=>{
         creatorId:req.userId
     })
 
-    // reg.save()
-    // .then(result=>{
-    //     console.log(result);
-    //     return User.findById(req.userId)
-    // })
-    // .then(user=>{
-    //     creator = user
-    //     user.posts.push(reg)
-    //     return user.save()
-
-    // })
-    // .then(result=>{
-    //     res.status(201).json({
-    //         message:'object created',
-    //         post:reg,
-    //         creator:{_id:creator._id,name:creator.name}
-    //     })
-    // })
-    // .catch(err=>{
-    //     if(!err.statusCode){
-    //         err.statusCode =500
-    //     }
-    //     next(err)
-    // })
+   
 }
 
 exports.updateRegions =async(req,res,next)=>{
     const regId = req.params.id
     const name = req.body.name
-    // const viewBox = req.body.viewBox
-    // const pathd = req.body.pathd
-    // const transform = req.body.transform
+   
 
     try {
     const region = await Region.findById(regId)
@@ -124,10 +93,9 @@ exports.updateRegions =async(req,res,next)=>{
         throw error
     }
     region.name= name
-    // region.viewBox =viewBox
-    // region.pathd =pathd
-    // region.transform = transform
-    const data = region.save()
+   
+    const data = await region.save()
+   
     res.status(200).json({
         message:`ma'lumotlar o'zgartirildi`,
         data: data
