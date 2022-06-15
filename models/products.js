@@ -34,11 +34,11 @@ const productsSchema = new Schema({
         type:Boolean,
         required:true
     },
-    typeofinsurerId:{
+    typeofinsurerId:[{
         type: Schema.Types.ObjectId,
         ref: 'Typeofinsurer',
         required: true
-    },
+    }],
     statusofproducts:{
         type: Schema.Types.ObjectId,
         ref: 'Statusofproducts',
@@ -54,7 +54,12 @@ const productsSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Risks',
         required: true
-        }
+        },
+        classeId:{ 
+            type: Schema.Types.ObjectId,
+            ref: 'Classesofproduct',
+            required: true
+            }
     } ],
     //======page 2=======
     isapplicationform:{
