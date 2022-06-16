@@ -6,7 +6,9 @@ const classesofproductSchema = new Schema({
         type:String,
         required:true
     },
-   
+    coolers:{
+        type:String,
+    },   
     creatorId:{
         type: Schema.Types.ObjectId,
         ref: 'Users',

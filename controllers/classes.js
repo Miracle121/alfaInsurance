@@ -53,9 +53,11 @@ exports.createClassesofproduct= async (req,res,next)=>{
         throw error
         }
     const name = req.body.name
+    const coolers = req.body.coolers
       
     const group =new Classesofproduct({
         name: name,
+        coolers:coolers,
         creatorId: req.userId
     })
     const groups = await group.save()
@@ -68,7 +70,8 @@ exports.createClassesofproduct= async (req,res,next)=>{
 
 exports.updateClassesofproduct =async(req,res,next)=>{
     const groupsId= req.params.id
-    const name = req.body.name    
+    const name = req.body.name   
+    const coolers = req.body.coolers 
    
     try {
     const groups = await Classesofproduct.findById(groupsId)
@@ -77,7 +80,8 @@ exports.updateClassesofproduct =async(req,res,next)=>{
         error.statusCode = 404
         throw error
     }
-    groups.name= name   
+    groups.name= name 
+    groups.coolers=coolers  
     const classesofproduct = await groups.save()
     res.status(200).json({
         message:`Classe of products`,
