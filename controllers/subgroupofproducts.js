@@ -122,3 +122,23 @@ exports.deleteSubgroupOfProducts = async(req,res,next)=>{
     }
 }
 
+exports.filterByGroupsofproductId= async(req,res,next)=>{
+    const groupsId= req.params.id
+    try {
+        const groups= await Subgroupofproducts.find({"groupId":groupsId})
+        if(!groups){
+            err.statusCode =404
+        }
+        res.status(200).json({
+            message:`ma'lumotlar topildi`,
+            data:groups
+        })
+    } catch (err) {
+        if(!err.statusCode)
+        {
+            err.statusCode =500
+        }
+        next(err)
+    }
+
+}

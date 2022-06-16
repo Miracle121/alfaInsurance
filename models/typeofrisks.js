@@ -5,10 +5,7 @@ const typeofrisksSchema = new Schema({
         type:String,
         required:true
     },
-    classesId:{
-        type: Schema.Types.ObjectId,
-        ref: 'Classesofproduct',
-    },
+    
     creatorId:{
         type: Schema.Types.ObjectId,
         ref: 'Users',

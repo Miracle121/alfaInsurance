@@ -25,6 +25,7 @@ exports.getRisks= async(req,res,next)=>{
 }
 
 exports.getRisksId =async(req,res,next)=>{
+    console.log("XXXX");
     const riskId= req.params.id
     try {
         const typeofrisk= await Risks.findById(riskId)
@@ -53,9 +54,13 @@ exports.createRisks= async (req,res,next)=>{
         }
     const name = req.body.name     
     const typeofrisksId = req.body.typeofrisksId 
+    const classesId = req.body.classesId
+    const num = req.body.num
     const group =new Risks({
         name: name,
         typeofrisksId:typeofrisksId,
+        classesId:classesId,
+        categorynumber:num,
         creatorId: req.userId
     })
     const groups = await group.save()
@@ -69,7 +74,9 @@ exports.createRisks= async (req,res,next)=>{
 exports.updateRisks =async(req,res,next)=>{
     const typeofriskId= req.params.id
     const name = req.body.name   
-    const typeofrisksId = req.body.typeofrisksId     
+    const typeofrisksId = req.body.typeofrisksId    
+    const classesId = req.body.classesId
+    const num = req.body.num 
     try {
     const groups = await Risks.findById(typeofriskId)
     if(!groups){
@@ -79,6 +86,8 @@ exports.updateRisks =async(req,res,next)=>{
     }
     groups.name= name  
     groups.typeofrisksId=typeofrisksId
+    groups.classesId=classesId
+    groups.num=num
     const typeofrisk = await groups.save()
     res.status(200).json({
         message:`Risks is changed`,
@@ -121,3 +130,49 @@ exports.deleteRisks = async(req,res,next)=>{
     }
 }
 
+exports.filteringByTypeofriskId = async(req,res,next)=>{
+    
+    const typeofriskId= req.params.id
+    try {
+        const typeofrisk= await Risks.find({"typeofrisksId":typeofriskId})
+      
+        if(!typeofrisk){
+            err.statusCode =404
+        }
+        res.status(200).json({
+            message:`Risks list`,
+            data:typeofrisk
+        })
+    } catch (err) {
+        if(!err.statusCode)
+        {
+            err.statusCode =500
+        }
+        next(err)
+    }
+
+}
+
+
+exports.filteringByClasseId= async(req,res,next)=>{
+    
+    const classeId= req.params.id
+    try {
+        const data= await Risks.find({"classesId":classeId})
+      
+        if(!data){
+            err.statusCode =404
+        }
+        res.status(200).json({
+            message:`Risks list`,
+            data:data
+        })
+    } catch (err) {
+        if(!err.statusCode)
+        {
+            err.statusCode =500
+        }
+        next(err)
+    }
+
+}

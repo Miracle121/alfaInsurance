@@ -12,5 +12,7 @@ router.post('/',IsAuth,[body('name').trim().isLength({min:3})],groupsofproducts.
 router.put('/:id',IsAuth,groupsofproducts.updateSubgroupOfProducts)
 router.delete('/:id',IsAuth,groupsofproducts.deleteSubgroupOfProducts)
 
+router.get('/filter/:id',IsAuth,groupsofproducts.filterByGroupsofproductId)
+
 
 module.exports = router

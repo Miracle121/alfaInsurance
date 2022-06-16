@@ -10,6 +10,14 @@ const risksSchema = new Schema({
         ref: 'Typeofrisks',
         required: true
     },
+    classesId:{
+        type: Schema.Types.ObjectId,
+        ref: 'Classesofproduct',
+        required: true
+    },
+    categorynumber:{
+        type: Number     
+    },
     creatorId:{
         type: Schema.Types.ObjectId,
         ref: 'Users',
