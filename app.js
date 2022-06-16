@@ -81,7 +81,7 @@ app.use('/additionaldocuments',additionaldocuments)
 app.use('/typeofclaimsettlement',typeofclaimsettlement)
 app.use('/typeofrefund',typeofrefund)
 app.use('/typeoffranchise',typeoffranchise)
-app.use('./baseoffranchise',baseoffranchise)
+app.use('/baseoffranchise',baseoffranchise)
 //========================28.05.2022=========
 app.use('/typeofpersons',typeofpersons)
 app.use('/agents',agents)

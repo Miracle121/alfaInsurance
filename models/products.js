@@ -75,20 +75,18 @@ const productsSchema = new Schema({
         type:Boolean,
         required:true
     },
-    contractform:[
-        [{
+    contractform: [{
             type: Schema.Types.ObjectId,
             ref: 'Contractformdocs'
            
-        }]
-    ],
+        }],
     Isadditionaldocuments:{
         type:Boolean,
         required:true
     },
     additionaldocuments:[{ 
             type: Schema.Types.ObjectId,
-            ref: 'additionaldocuments'
+            ref: 'Additionaldocuments'
            
         }],
     //=====page 3==== 
@@ -261,13 +259,12 @@ const productsSchema = new Schema({
     },
     typeoffranchise:{
         type: Schema.Types.ObjectId,
-        ref: 'typeoffranchise',
+        ref: 'Typeoffranchise',
         required: true
     },
-    baseoffranchise:{
-        
+    baseoffranchise:{        
         type: Schema.Types.ObjectId,
-        ref: 'baseoffranchise',
+        ref: 'Baseoffranchise',
         required: true
     },
     franchise:{

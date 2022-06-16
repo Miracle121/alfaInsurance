@@ -2,7 +2,7 @@ const {Schema,model} = require('mongoose')
 
 
 const agentsSchema = new Schema({
-    fullName:{
+    name:{
         type:String,
         required:true
     },

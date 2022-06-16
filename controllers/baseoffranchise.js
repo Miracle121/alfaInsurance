@@ -10,7 +10,7 @@ exports.getBaseoffranchise= async(req,res,next)=>{
      totalItems = await Baseoffranchise.find().countDocuments()
      const data = await Baseoffranchise.find().skip((page-1)*counts).limit(counts)
      res.status(200).json({
-         message:`Type of franchise`,
+         message:`Base of franchise`,
          data:data,
          totalItems:totalItems
      })

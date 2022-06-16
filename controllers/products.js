@@ -1,17 +1,41 @@
 const Products = require('../models/products')
-const Applicationformdocs = require('../models/applicationformdocs')
 const {validationResult} = require('express-validator')
-const uploadFile = require("../middleware/upload");
+
 exports.getProducts= async(req,res,next)=>{
     const page = req.query.page ||1   
     const counts = 20 //req.query.count ||20
     let totalItems
     try {
         totalItems = await Products.find().countDocuments()
-        const risks = await Products.find().skip((page-1)*counts).limit(counts)
+        const data = await Products.find()
+        .populate('groupofproductsId','name')
+        .populate('subgroupofproductsId','name')
+        .populate('typeofsectorId','name')
+        .populate('typeofinsurerId','name')
+        .populate('statusofproducts','name')      
+        .populate('riskId.riskgroup','name')
+        .populate('riskId.risk','name')
+        .populate('riskId.classeId','name')
+        .populate('applicationformId','name')
+        .populate('additionaldocuments','name')
+        .populate('fixedpolicyholder','name')
+        .populate('fixedbeneficiary','name')
+        .populate('policyformatId','name')
+        .populate('typeofclaimsettlement','name')
+        .populate('typeofrefund','name')
+        .populate('typeofrefund','name')
+        .populate('typeofpayment','name')
+        .populate('typeofpolice','name')
+        .populate('agentlist','name')
+        .populate('tariffperclasses.classes','name')
+        .populate('franchise.risk','name')
+        .populate('franchise.typeoffranchise','name')
+        .populate('franchise.baseoffranchise','name')    
+
+        .skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Products list`,
-         products:risks,
+         data:data,
          totalItems:totalItems
      })
     } 
@@ -28,13 +52,36 @@ exports.getProducts= async(req,res,next)=>{
 exports.getProductsId =async(req,res,next)=>{
     const riskId= req.params.id
     try {
-        const typeofrisk= await Products.findById(riskId)
-        if(!typeofrisk){
+        const data= await Products.findById(riskId)
+        .populate('groupofproductsId','name')
+        .populate('subgroupofproductsId','name')
+        .populate('typeofsectorId','name')
+        .populate('typeofinsurerId','name')
+        .populate('statusofproducts','name')      
+        .populate('riskId.riskgroup','name')
+        .populate('riskId.risk','name')
+        .populate('riskId.classeId','name')
+        .populate('applicationformId','name')
+        .populate('additionaldocuments','name')
+        .populate('fixedpolicyholder','fullName')
+        .populate('fixedbeneficiary','fullName')
+        .populate('policyformatId','name')
+        .populate('typeofclaimsettlement','name')
+        .populate('typeofrefund','name')
+        .populate('typeofrefund','name')
+        .populate('typeofpayment','name')
+        .populate('typeofpolice','name')
+        .populate('agentlist','fullName')
+        .populate('tariffperclasses.classes','name')
+        .populate('franchise.risk','name')
+        .populate('franchise.typeoffranchise','name')
+        .populate('franchise.baseoffranchise','name')
+        if(!data){
             err.statusCode =404
         }
         res.status(200).json({
             message:`Products list`,
-            typeofrisk:typeofrisk
+            data:data
         })
     } catch (err) {
         if(!err.statusCode)
@@ -45,8 +92,7 @@ exports.getProductsId =async(req,res,next)=>{
     }
 }
 
-exports.createProducts= async (req,res,next)=>{     
-
+exports.createProducts= async (req,res,next)=>{  
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         const error = new Error('Validation error')
@@ -68,8 +114,7 @@ exports.createProducts= async (req,res,next)=>{
     const iscontractform= req.body.iscontractform
     const contractform= req.body.contractform
     const Isadditionaldocuments= req.body.Isadditionaldocuments
-    const additionaldocuments= req.body.additionaldocuments  
-    
+    const additionaldocuments= req.body.additionaldocuments      
     //===========page 3===================
     const Isfixedpolicyholder = req.body.Isfixedpolicyholder
     const fixedpolicyholder = req.body.fixedpolicyholder
@@ -270,10 +315,10 @@ exports.updateProducts =async(req,res,next)=>{
     products.limitofagreement=limitofagreement
     products.tariffperclasses=tariffperclasses
     products.franchise=franchise
-    const typeofrisk = await products.save()
+    const data = await products.save()
     res.status(200).json({
         message:`Products is changed`,
-        data: typeofrisk
+        data: data
     })
     } 
     catch (err) {

@@ -8,7 +8,8 @@ exports.getAgents= async(req,res,next)=>{
     let totalItems
     try {
      totalItems = await Agents.find().countDocuments()
-     const data = await Agents.find().populate('typeofpersons','name')
+     const data = await Agents.find()
+     .populate('typeofpersons','name')
      .populate('regionId','name')
      .populate('districtsId','name')
      .skip((page-1)*counts).limit(counts)
@@ -49,7 +50,7 @@ exports.getAgentsById = async(req,res,next)=>{
 }
 
 exports.createAgents = async(req,res,next)=>{
-    const fullName = req.body.fullName
+    const name = req.body.fullName
     const inn =req.body.inn
     const pin= req.body.pin
     const typeofpersons= req.body.typeofpersons
@@ -58,7 +59,7 @@ exports.createAgents = async(req,res,next)=>{
     const isbeneficiary= req.body.isbeneficiary
     const isfixedpolicyholde = req.body.isfixedpolicyholde 
     const result = new Agents({
-        fullName:fullName,
+        name:name,
         inn:inn,
         pin:pin,
         typeofpersons:typeofpersons,

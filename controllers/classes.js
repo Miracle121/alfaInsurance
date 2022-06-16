@@ -85,7 +85,7 @@ exports.updateClassesofproduct =async(req,res,next)=>{
     const classesofproduct = await groups.save()
     res.status(200).json({
         message:`Classe of products`,
-        classesofproduct: classesofproduct
+        data: classesofproduct
     })
     } catch (err) {
         if(!err.statusCode){
