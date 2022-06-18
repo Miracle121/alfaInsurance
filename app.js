@@ -35,6 +35,8 @@ const baseoffranchise = require('./routes/baseoffranchise')
 const typeofpersons=  require('./routes/typeofpersons')
 const agents = require('./routes/agents')
 const products=require('./routes/products')
+const translations = require('./routes/translations')
+const typeofposition = require('./routes/typeofposition')
 // const genders =require('./routes/genders')
 const app = express();
 // const URL =  'mongodb://localhost:27017/Alfa' 
@@ -86,7 +88,9 @@ app.use('/baseoffranchise',baseoffranchise)
 app.use('/typeofpersons',typeofpersons)
 app.use('/agents',agents)
 app.use('/products',products)
-
+//=========================18.06.2022=====
+app.use('/translations',translations)
+app.use('/typeofposition',typeofposition)
 
 
 

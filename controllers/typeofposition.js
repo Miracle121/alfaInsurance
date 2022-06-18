@@ -1,16 +1,16 @@
-const Translations = require('../models/translations')
+const Typeofposition = require('../models/typeofposition')
 const {validationResult} = require('express-validator')
 
-exports.getTranslations= async(req,res,next)=>{
+exports.getTypeofposition= async(req,res,next)=>{
     const page = req.query.page ||1   
     const counts = 20 //req.query.count ||20 classesofproduct
     let totalItems
     try {
-        totalItems = await Translations.find().countDocuments()
-        const classesofproduct = await Translations.find().skip((page-1)*counts).limit(counts)
+        totalItems = await Typeofposition.find().countDocuments()
+        const data = await Typeofposition.find().skip((page-1)*counts).limit(counts)
          res.status(200).json({
-         message:`Translations of products`,
-         data:classesofproduct,
+         message:`Typeofposition of products`,
+         data:data,
          totalItems:totalItems
      })
     } 
@@ -24,16 +24,16 @@ exports.getTranslations= async(req,res,next)=>{
     } 
 }
 
-exports.getTranslationsId =async(req,res,next)=>{
-    const translationsId= req.params.id
+exports.getTypeofpositionId =async(req,res,next)=>{
+    const classesId= req.params.id
     try {
-        const translations= await Translations.findById(translationsId)
-        if(!translations){
+        const data= await Typeofposition.findById(classesId)
+        if(!data){
             err.statusCode =404
         }
         res.status(200).json({
-            message:`Translations of products`,
-            data:translations
+            message:`Typeofposition of products`,
+            data:data
         })
     } catch (err) {
         if(!err.statusCode)
@@ -44,7 +44,7 @@ exports.getTranslationsId =async(req,res,next)=>{
     }
 }
 
-exports.createTranslations= async (req,res,next)=>{  
+exports.createTypeofposition= async (req,res,next)=>{  
     let creator ;
     const errors = validationResult(req)
     if(!errors.isEmpty()){
@@ -52,49 +52,34 @@ exports.createTranslations= async (req,res,next)=>{
         error.statusCode = 422
         throw error
         }
-    const key = req.body.key
-    const uz = req.body.uz
-    const ru = req.body.ru
-    const eng = req.body.eng
-      
-    const group =new Translations({
-        key: key,
-        uz:uz,
-        ru:ru,
-        eng:eng,
+    const name = req.body.name  
+    const group =new Typeofposition({
+        name: name,
         creatorId: req.userId
     })
     const groups = await group.save()
     res.status(201).json({
-        message:`Translations of products`,
+        message:`Typeofposition of products`,
         data: groups,
         creatorId:req.userId
     })
 }
 
-exports.updateTranslations =async(req,res,next)=>{
-    const translationsId= req.params.id
-    const key = req.body.key
-    const uz = req.body.uz
-    const ru = req.body.ru
-    const eng = req.body.eng
-   
+exports.updateTypeofposition =async(req,res,next)=>{
+    const groupsId= req.params.id
+    const name = req.body.name     
     try {
-    const groups = await Translations.findById(translationsId)
+    const groups = await Typeofposition.findById(groupsId)
     if(!groups){
         const error = new Error('Object  not found')
         error.statusCode = 404
         throw error
     }
-    groups.key= key 
-    groups.uz= uz 
-    groups.ru= ru
-    groups.eng= eng  
-   
-    const data = await groups.save()
+    groups.name= name 
+    const classesofproduct = await groups.save()
     res.status(200).json({
-        message:`Translations of products`,
-        data: data
+        message:`Typeofposition of products`,
+        data: classesofproduct
     })
     } catch (err) {
         if(!err.statusCode){
@@ -106,10 +91,10 @@ exports.updateTranslations =async(req,res,next)=>{
     } 
 }
 
-exports.deleteTranslations = async(req,res,next)=>{
+exports.deleteTypeofposition = async(req,res,next)=>{
     const subgroupsId= req.params.id
     try {
-        const deleteddata = await Translations.findById(subgroupsId)
+        const deleteddata = await Typeofposition.findById(subgroupsId)
     if(!deleteddata){
         const error = new Error('Object  not found')
         error.statusCode = 404
@@ -120,7 +105,7 @@ exports.deleteTranslations = async(req,res,next)=>{
         error.statusCode =403
         throw error
     }
-    const data=await Translations.findByIdAndRemove(subgroupsId)     
+    const data=await Typeofposition.findByIdAndRemove(subgroupsId)     
     res.status(200).json({
         message:'Classe of products',
         data:data

@@ -1,21 +1,18 @@
 const {Schema,model} = require('mongoose')
-
-
 const translationsSchema = new Schema({
     key:{
         type:String,
         required:true
     },
     uz:{
-        type:String,
+        type:String
     },
     ru:{
-        type:String,
+        type:String
     },
     eng:{
-        type:String,
-    },
-   
+        type:String
+    },   
     creatorId:{
         type: Schema.Types.ObjectId,
         ref: 'Users',
