@@ -34,11 +34,11 @@ const productsSchema = new Schema({
         type:Boolean,
         required:true
     },
-    typeofinsurerId:[{
+    typeofinsurerId:{
         type: Schema.Types.ObjectId,
         ref: 'Typeofinsurer',
         required: true
-    }],
+    },
     statusofproducts:{
         type: Schema.Types.ObjectId,
         ref: 'Statusofproducts',
@@ -94,11 +94,11 @@ const productsSchema = new Schema({
         type:Boolean,
         required:true
     }, 
-    fixedpolicyholder: [ { 
+    fixedpolicyholder:  { 
             type: Schema.Types.ObjectId,
             ref: 'Agents',   //'fixedpolicyholde', 
             required: true
-        }],
+        },
     Isbeneficiary:{
             type: Boolean,            
             required: true
@@ -183,14 +183,12 @@ const productsSchema = new Schema({
         ref: 'Typeofclaimsettlement',
         required: true
     },
-    typeofrefund:[ 
+    typeofrefund:
         {
         type: Schema.Types.ObjectId,
         ref: 'Typeofrefund',
         required: true
-
-        }
-    ],
+        },
     typeofpayment:[{   
         type: Schema.Types.ObjectId,
         ref: 'Typeofpayments',

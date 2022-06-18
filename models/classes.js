@@ -6,7 +6,7 @@ const classesofproductSchema = new Schema({
         type:String,
         required:true
     },
-    coolers:{
+    color:{
         type:String,
     },   
     creatorId:{

@@ -53,11 +53,11 @@ exports.createClassesofproduct= async (req,res,next)=>{
         throw error
         }
     const name = req.body.name
-    const coolers = req.body.coolers
+    const color = req.body.color
       
     const group =new Classesofproduct({
         name: name,
-        coolers:coolers,
+        color:color,
         creatorId: req.userId
     })
     const groups = await group.save()
