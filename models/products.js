@@ -34,6 +34,11 @@ const productsSchema = new Schema({
         type:Boolean,
         required:true
     },
+    typeofpersones:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Typeofpersones',
+        required: true
+    }],
     typeofinsurerId:{
         type: Schema.Types.ObjectId,
         ref: 'Typeofinsurer',

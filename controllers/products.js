@@ -106,6 +106,7 @@ exports.createProducts= async (req,res,next)=>{
     const subgroupofproductsId= req.body.subgroupofproductsId
     const typeofsectorId= req.body.typeofsectorId
     const isrequirepermission= req.body.isrequirepermission
+    const typeofpersones = req.body.typeofpersones
     const typeofinsurerId= req.body.typeofinsurerId
     const statusofproducts = req.body.statusofproducts
     const riskId = req.body.riskId
@@ -155,6 +156,7 @@ exports.createProducts= async (req,res,next)=>{
         groupofproductsId:groupofproductsId,
         subgroupofproductsId:subgroupofproductsId,
         typeofsectorId:typeofsectorId,
+        typeofpersones:typeofpersones,
         isrequirepermission:isrequirepermission,
         typeofinsurerId:typeofinsurerId,
         statusofproducts:statusofproducts,
@@ -215,6 +217,7 @@ exports.updateProducts =async(req,res,next)=>{
     const groupofproductsId = req.body.groupofproductsId
     const subgroupofproductsId= req.body.subgroupofproductsId
     const typeofsectorId= req.body.typeofsectorId
+    const typeofpersones = req.body.typeofpersones
     const isrequirepermission= req.body.isrequirepermission
     const typeofinsurerId= req.body.typeofinsurerId
     const statusofproducts = req.body.statusofproducts
@@ -271,6 +274,7 @@ exports.updateProducts =async(req,res,next)=>{
     products.groupofproductsId=groupofproductsId
     products.subgroupofproductsId=subgroupofproductsId
     products.typeofsectorId=typeofsectorId
+    products.typeofpersones =typeofpersones
     products.isrequirepermission=isrequirepermission
     products.typeofinsurerId=typeofinsurerId
     products.statusofproducts=statusofproducts
