@@ -26,8 +26,9 @@ exports.getTranslations= async(req,res,next)=>{
 
 exports.getTranslationsId =async(req,res,next)=>{
     const translationsId= req.params.id
+   
     try {
-        const translations= await Translations.findById(translationsId)
+        const translations= await Translations.findById(translationsId)   //find({},['key',translationsId])
         if(!translations){
             err.statusCode =404
         }
@@ -52,10 +53,15 @@ exports.createTranslations= async (req,res,next)=>{
         error.statusCode = 422
         throw error
         }
-    const key = req.body.key
-    const uz = req.body.uz
-    const ru = req.body.ru
-    const eng = req.body.eng
+       
+
+        let keys = Object.keys(req.body)      
+
+     const key =req.body[keys[0]] //req.body.key
+    
+    const uz = ""// req.body.uz
+    const ru = ""//req.body.ru
+    const eng =""// req.body.eng
       
     const group =new Translations({
         key: key,
@@ -131,5 +137,33 @@ exports.deleteTranslations = async(req,res,next)=>{
         }
         next(err)
     }
+}
+
+exports.getByLanguages = async(req,res,next)=>{
+
+    const lan = req.params.id
+  
+    try {
+        const translations= await Translations.find({},['key',lan])
+        if(!translations){
+            err.statusCode =404
+        }
+        let obj = {}
+        translations.forEach((translation) =>{
+            delete _id;
+            obj[translation.key] = translation[lan]
+        })
+        res.status(200).json(         
+           obj
+        )
+    } catch (err) {
+        if(!err.statusCode)
+        {
+            err.statusCode =500
+        }
+        next(err)
+    }
+
+
 }
 
