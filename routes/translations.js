@@ -11,7 +11,7 @@ router.get('/:id',IsAuth,translations.getTranslationsId)
 router.post('/',IsAuth,translations.createTranslations)
 router.put('/:id',IsAuth,translations.updateTranslations)
 router.delete('/:id',IsAuth,translations.deleteTranslations)
-router.get('/lang/:id',IsAuth,translations.getByLanguages)
+router.get('/lang/:id',translations.getByLanguages)
 
 
 module.exports = router

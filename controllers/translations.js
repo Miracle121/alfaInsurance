@@ -52,17 +52,12 @@ exports.createTranslations= async (req,res,next)=>{
         const error = new Error('Validation error')
         error.statusCode = 422
         throw error
-        }
-       
-
+        }      
         let keys = Object.keys(req.body)      
-
-     const key =req.body[keys[0]] //req.body.key
-    
-    const uz = ""// req.body.uz
-    const ru = ""//req.body.ru
-    const eng =""// req.body.eng
-      
+    const key =req.body[keys[0]] //req.body.key   
+    const uz = null// req.body.uz
+    const ru = null//req.body.ru
+    const eng =null// req.body.eng     
     const group =new Translations({
         key: key,
         uz:uz,
