@@ -6,14 +6,13 @@ let storage = multer.diskStorage({
     cb(null, __basedir + "/uploads/");
   },
   filename: (req, file, cb) => {
-    const match = [
-  
+    const match = [  
     "application/pdf",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "application/msword"   
   ];
     if (match.indexOf(file.mimetype) === -1) {      
-      var message = `${file.originalname} is invalid. Only accept png/jpeg.`;
+      var message = `${file.originalname} is invalid. Only accept pdf,doc,docx`;
       return cb(message, null);
     }
     cb(null, file.originalname);
@@ -24,7 +23,7 @@ let uploadFile = multer({
   limits: { fileSize: maxSize },
 })
 .single("file")  
-// .array("multi-files",10);
+
 let uploadFileMiddleware = util.promisify(uploadFile);
 module.exports = uploadFileMiddleware;
 

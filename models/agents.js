@@ -2,16 +2,9 @@ const {Schema,model} = require('mongoose')
 
 
 const agentsSchema = new Schema({
-    name:{
-        type:String,
-        required:true
-    },
     inn:{
         type:String,
-        required:true
-    },
-    pin:{
-        type:String,
+        unique:true,
         required:true
     },
     typeofpersons:{
@@ -21,28 +14,69 @@ const agentsSchema = new Schema({
     },
     regionId:{
         type: Schema.Types.ObjectId,
-        ref: 'Region',
-        required:true      
-     },
-     districtsId:{
-        type: Schema.Types.ObjectId,
-        ref: 'Districts'      
-     },
-     isbeneficiary:{
+        ref: 'Region'            
+     },    
+    isbeneficiary:{
         type: Schema.Types.ObjectId,
         ref: 'Products'
      },
-     isfixedpolicyholde:{
+    isfixedpolicyholde:{
         type: Schema.Types.ObjectId,
         ref: 'Products'
      },
-
-   
+     // endi qilinadi.
+    typeofagent:{
+        type: Schema.Types.ObjectId,
+        ref: 'Typeofagent'
+     },  
+    forindividualsdata:[{
+        fullname:{
+            type:String
+        },
+        passportSeries:  {
+            type:String
+         },
+        pinId:{
+            type:String           
+        },
+        passportissuancedate:{
+            type:String
+        },
+        passportissuedby:{
+            type:String
+        },
+        dateofbirth:{
+            type:Date
+        },
+        numberofcard:{
+            type:String
+        }       
+    }],
+    corporateentitiesdata:[{
+        nameoforganization:{
+            type:String            
+        },
+        oked:{
+            type:String
+        },
+        mfo:{
+            type:String
+        },
+        bank:{
+            type:String
+        },
+        scheduledaccount:{
+            type:String
+        }
+     }],
+    address:{
+        type:String
+     },
     creatorId:{
         type: Schema.Types.ObjectId,
         ref: 'Users',
         required: true
-    }  
+    }      
 },
 { timestamps:true })
 

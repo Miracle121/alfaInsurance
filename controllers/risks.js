@@ -7,7 +7,7 @@ exports.getRisks= async(req,res,next)=>{
     let totalItems
     try {
         totalItems = await Risks.find().countDocuments()
-        const risks = await Risks.find().skip((page-1)*counts).limit(counts)
+        const risks = await Risks.find().populate('typeofrisksId','name').populate('classesId','name').skip((page-1)*counts).limit(counts)
          res.status(200).json({
          message:`Risks list`,
          data:risks,
@@ -24,11 +24,10 @@ exports.getRisks= async(req,res,next)=>{
     } 
 }
 
-exports.getRisksId =async(req,res,next)=>{
-    console.log("XXXX");
+exports.getRisksId =async(req,res,next)=>{   
     const riskId= req.params.id
     try {
-        const typeofrisk= await Risks.findById(riskId)
+        const typeofrisk= await Risks.findById(riskId).populate('typeofrisksId','name').populate('classesId','name')
         if(!typeofrisk){
             err.statusCode =404
         }
@@ -130,12 +129,10 @@ exports.deleteRisks = async(req,res,next)=>{
     }
 }
 
-exports.filteringByTypeofriskId = async(req,res,next)=>{
-    
+exports.filteringByTypeofriskId = async(req,res,next)=>{    
     const typeofriskId= req.params.id
     try {
-        const typeofrisk= await Risks.find({"typeofrisksId":typeofriskId})
-      
+        const typeofrisk= await Risks.find({"typeofrisksId":typeofriskId}).populate('classesId','name')      
         if(!typeofrisk){
             err.statusCode =404
         }
@@ -153,13 +150,10 @@ exports.filteringByTypeofriskId = async(req,res,next)=>{
 
 }
 
-
-exports.filteringByClasseId= async(req,res,next)=>{
-    
+exports.filteringByClasseId= async(req,res,next)=>{    
     const classeId= req.params.id
     try {
-        const data= await Risks.find({"classesId":classeId})
-      
+        const data= await Risks.find({"classesId":classeId})      
         if(!data){
             err.statusCode =404
         }

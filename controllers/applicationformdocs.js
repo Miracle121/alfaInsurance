@@ -56,7 +56,6 @@ exports.createApplicationformdocs = async(req,res,next)=>{
       }
       const name = req.file.originalname  //req.body.name
       const url= directoryPath+name //req.body.url  
-      console.log(name);   
       const result = new Applicationformdocs({
           name:name,
           url:url,
